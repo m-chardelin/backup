@@ -1,0 +1,2 @@
+pfNE = @(varargin) text([vector3d.X,vector3d.Y],{'E','N'}, 'BackgroundColor','w','tag','axesLabels',varargin{:}); 
+pfXY = @(varargin) text([vector3d.X,vector3d.Y],{'X','Y'}, 'BackgroundColor','w','tag','axesLabels',varargin{:}); 
