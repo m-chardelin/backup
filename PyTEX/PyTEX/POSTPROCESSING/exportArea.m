@@ -1,6 +1,6 @@
 function exportArea(OUTPUT, ebsd, grains, SG, thinSection, phaseList)
 
-        [oarea] = fopen(strcat(OUTPUT, 'area.txt'), 'a+');
+        [oarea] = fopen(strcat(OUTPUT, 'area.csv'), 'a+');
 
         a = ebsd.mineralList;
         

@@ -12,4 +12,4 @@ analysis folder
 
 install_mtex
 
-##
+## Télécharger MTEX avant !

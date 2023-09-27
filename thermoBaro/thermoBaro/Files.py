@@ -13,7 +13,7 @@ class Files():
 
 
     def Load(self, table, sort = False):
-        self.df = pd.read_csv(table, sep = '&')
+        self.df = pd.read_csv(table, sep = ';')
         if sort == True:
             self.sort = set(self.df[self.sort])
         return self.df
@@ -31,7 +31,7 @@ class Files():
 
             if iterMineral == True:
                 for ssc in files.sscat:
-                    if os.path.exists(f'{files.input}/{c}_{ssc}_{self.table}.txt'):
+                    if os.path.exists(f'{files.input}/{c}_{ssc}_{self.task}.csv'):
                         func(files, c, ssc)
 
     
@@ -90,7 +90,7 @@ class Files():
             
             todo : attention au niveau de nommage, trop ne sera pas assez précis """
         if cat == '':
-            a = files = [file.replace(dat, '') for file in os.listdir(folder) if file.endswith(dat)]
+            files = [file.replace(dat, '') for file in os.listdir(folder) if file.endswith(dat)]
             self.cat = set([file.split('_')[0] for file in files if file.count('_') > 1])
         else:
             self.cat = cat
@@ -101,7 +101,7 @@ class Files():
             self.sscat = sscat
 
    
-    def SortFiles(self, folders, liste):
+    def SortFiles(self, folders, liste, sep):
         """tri des données selon la liste de clefs données en argument :
             - vérifie parmi tous les fichiers d'un dossier ceux content les éléments
             - crée un dossier s'il n'existe pas déjà
@@ -110,7 +110,7 @@ class Files():
             ==> permet de classer la multitude de fichiers de sortie en des dossiers facilement consultables"""
         for folder in folders:
             for lis in liste:
-                files = [file for file in os.listdir(folder) if lis in file]
+                files = [file for file in os.listdir(folder) if f'{lis}{sep}' in file]
                 for file in files:
                     os.makedirs(f'{folder}/{lis}', exist_ok = True)
                     try:
@@ -215,20 +215,20 @@ class Files():
         
         try:
             writer = pd.ExcelWriter(f'{files.output}/{cat}_{self.table}.xlsx', engine='xlsxwriter')
-                
             c = [cat]
             
             sscat = sorted(files.sscat, reverse = True)
             subcat = sorted(files.subcat)
             sort = sorted(files.sort)
             
+            print('list')
+            
             for it in list(product(c, sscat, subcat, sort)):
                     
                 names = {'id': f'{it[1]}_{it[2]}_{it[3]}', 'cat': it[0], 'sscat': it[1], 'subcat': it[2], 'sort': it[3]}
 
-                    
-                if os.path.exists(f'{files.input}/{it[0]}_{it[1]}_{self.table}.txt'):
-                    self.Load(f'{files.input}/{it[0]}_{it[1]}_{self.table}.txt')
+                if os.path.exists(f'{files.input}/{it[0]}_{it[1]}_{self.table}.csv'):
+                    self.Load(f'{files.input}/{it[0]}_{it[1]}_{self.table}.csv')
                     
                     if names['subcat'] == 'all':
                         names['id'] = f'{it[1]}_{it[2]}'
@@ -237,7 +237,7 @@ class Files():
                     elif names['subcat'] != 'all':
                         df = self.df[self.df[names['sort']] == names['subcat']]
                         df.to_excel(writer, sheet_name=names['id'], index = None)
-            
+                        
             writer.close()
         except:
             pass
@@ -256,7 +256,7 @@ class Files():
                 files = [file for file in files if e not in file]
                 
         for file in files:
-            file = file.replace('.txt', '')
+            file = file.replace('.csv', '')
             try:
                 writer = pd.ExcelWriter(f'{destination}/{file}.xlsx', engine='xlsxwriter')
                 self.Load(f'{source}/{file}')

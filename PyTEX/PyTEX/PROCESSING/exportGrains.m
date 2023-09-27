@@ -1,10 +1,11 @@
 function exportGrains(OUTPUT, thinSection, phase, grains)
 
-        name = strcat(OUTPUT, thinSection, '_', phase, '_Grains.txt');
+        name = strcat(OUTPUT, thinSection, '_', phase, '_Grains.csv');
         name = char(name);
 
 
         id = grains.id;
+        size = grains.grainSize;
         [x, y] = centroid(grains);
         perimeter = grains.perimeter;
         diam = grains.diameter;
@@ -26,11 +27,11 @@ function exportGrains(OUTPUT, thinSection, phase, grains)
         tortuosity = perimeter ./ chGrains.perimeter;
         solidity = area ./ chGrains.area;
 
-        header = {'id', 'centroidX', 'centroidY', 'perimeter', 'diameter', 'area', 'aspectRatio', 'equivalentRadius',...
+        header = {'id', 'grainSize', 'centroidX', 'centroidY', 'perimeter', 'diameter', 'area', 'aspectRatio', 'equivalentRadius',...
             'shapeFactor', 'GOS', 'Angle', 'a', 'b', 'feret', 'numNeighbors', 'hullPerimeter', 'hullArea', 'deltaP', 'paris',...
             'deltaA', 'radiusD', 'convexity', 'tortuosity', 'solidity'};
 
-        data = [id, x, y, perimeter, diam, area, aspectRatio, equivalentRadius,...
+        data = [id, size, x, y, perimeter, diam, area, aspectRatio, equivalentRadius,...
             shapeFactor, GOS, Angle, a, b, feret, numNeighbor, chGrains.perimeter, chGrains.area, deltaP, paris,...
             deltaA, radiusD, convexity, tortuosity, solidity];
 

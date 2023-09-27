@@ -226,39 +226,50 @@ class functions():
     def iteration(self):
     
         self.data['XMg'] = self.XMg(self.data.Mg, self.data['Fe2+'])
-        self.data['XCa'] = self.XMg(self.data.Ca, self.data.Na)
+        self.data['XCa'] = self.XCa(self.data.Ca, self.data.Na)
+        self.data['XCr'] = self.XCr(self.data.Cr, self.data.Al)
         self.data['Na+K'] = self.data.Na + self.data.K
         self.data['XCr'] = self.XCr(self.data.Cr, self.data.Al)
         self.data['AlIV'] = self.AlIVcpx(self.data.Al, self.data.Cr, self.data.Ti, self.data.Na)
-
+        
+        ls = []
+        
         for m in self.phases:
-
+        
             if m == 'Ol':
                 data = self.data[self.data['phase'] == m]
                 ol = self.OLIVINE(data = data)
+                ls.append(ol)
+
 
             if m == 'Cpx':
 
                 data = self.data[self.data['phase'] == m]
                 cpx = self.CLINOPYROXENE(data = data)
+                ls.append(cpx)
 
             if m == 'Opx':
 
                 data = self.data[self.data['phase'] == m]
                 opx = self.ORTHOPYROXENE(data = data)
+                ls.append(opx)
 
             if m == 'Pl' :
 
                 data = self.data[self.data['phase'] == m]
                 pl = self.PLAGIOCLASE(data = data)
+                ls.append(pl)
                 
             if m == 'Sp':
-                 sp = self.data[self.data['phase'] == m]
+                sp = self.data[self.data['phase'] == m]
+                ls.append(sp)
                  
             if m == 'Tr':
-                 tr = self.data[self.data['phase'] == m]
+                tr = self.data[self.data['phase'] == m]
+                ls.append(tr)
+                
 
-        self.data = pd.concat([cpx, opx, ol, pl, sp, tr])
+        self.data = pd.concat(ls)
 
 
 
@@ -294,9 +305,7 @@ class functions():
     def temperature(self, data, P = 5):
         
         Ca = data.Ca
-        self.Ca = Ca
         t = self.temperature_BK(Ca, P)
-
         data['temperature_BKNG_K'] = t2 = self.temperature_NG(t)
         
         return data, t, t2
@@ -304,10 +313,11 @@ class functions():
 
     def PT(self, files, name, data, P = 5, T = 1273):
         
+        data = pd.read_csv(f'{files.output}/{name}_Fumagalli.csv', sep = ';')
+        
         data, data['T1BK'], data['T1NG'] = self.temperature(data, P)
         data['T1BK_C'] = data['T1BK'] - 273
         data['T1NG_C'] = data['T1NG'] -273
-
         XanC = data.XanC
         Ian = data.Ian
         XCa = data.XCa
@@ -318,13 +328,14 @@ class functions():
         data, data['T2BK'], data['T2NG'] = self.temperature(data, P = data.P1F)
         data['T2BK_C'] = data['T2BK'] - 273
         data['T2NG_C'] = data['T2NG'] - 273
+
         data['aAnc2'] = data.aAnc
         data['aAnc'] = self.aAnc(XanC, XCa, Ian, T = data['T2NG'])
         data, data['P2F'] = self.pressure_F(data, T = data.T2NG)
         
         data['P2F/T2NG'] = data.P2F/data.T2NG
         
-        data.to_csv(f'{files.output}/{name}_PT.txt', sep = '&')
+        data.to_csv(f'{files.output}/{name}_PT.csv', sep = ';')
 
         return data
 
@@ -399,4 +410,4 @@ class functions():
         self.temperature_NG(T)
         
         calc = self.SetAdd(calc)
-        calc.to_csv(f'{files.output}/{name}_BKNG.txt')
+        calc.to_csv(f'{files.output}/{name}_BKNG.csv')

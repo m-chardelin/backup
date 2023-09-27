@@ -18,8 +18,8 @@ class Data():
         
     def Load(self, files, element, info):
         """Charge les valeurs et les infos d'un set de données"""
-        self.element = pd.read_csv(f'{files.input}/{element}.txt', sep = '&')
-        self.infos = pd.read_csv(f'{files.input}/{info}.txt', sep = '&')
+        self.element = pd.read_csv(f'{files.input}/{element}.csv', sep = ';')
+        self.infos = pd.read_csv(f'{files.input}/{info}.csv', sep = ';')
 
         self.samples = set(self.infos['sample'])
         self.phases = set(self.infos['phase'])
@@ -41,7 +41,7 @@ class Data():
                 pass
         
         self.data = result
-        self.data.to_csv(f'{files.output}/{name}_points.txt', sep = '&')
+        self.data.to_csv(f'{files.output}/{name}_points.csv', sep = ';')
         return result
 
 
@@ -78,7 +78,7 @@ class Data():
                 
         self.stats = stats
         self.stats['operation'] = self.stats.index
-        self.stats.to_csv(f'{files.output}/{name}_stats.txt', sep = '&')
+        self.stats.to_csv(f'{files.output}/{name}_stats.csv', sep = ';')
         return stats
 
 
@@ -88,7 +88,7 @@ class Data():
             sub = stats[stats['operation'] == o]
             data = pd.concat([data, sub])
         self.resume = data
-        self.resume.to_csv(f'{files.output}/{name}_resume.txt', sep = '&')
+        self.resume.to_csv(f'{files.output}/{name}_resume.csv', sep = ';')
         return data
 
 
@@ -163,7 +163,7 @@ class Data():
         self.triplets['operation'] = 'points'
         
         self.tripletsAll = pd.concat([self.triplets, self.tripletsMean])
-        #self.tripletsAll.to_csv(f'{files.output}/{name}_triplets.txt', sep = '&')
+        #self.tripletsAll.to_csv(f'{files.output}/{name}_triplets.csv', sep = ';')
         return self.tripletsAll
 
 
@@ -272,7 +272,8 @@ class Data():
 
     def CONCAT(self, files, name):
         self.synthesis['operation'] = 'points'
+        self.synthesis['Ca'] = self.synthesis['Caopx']
         self.SYN = pd.concat([self.synthesis, self.synthesisMean])
-        self.SYN.to_csv(f'{files.output}/{name}_Fumagalli.txt', sep = '&')
+        self.SYN.to_csv(f'{files.output}/{name}_Fumagalli.csv', sep = ';')
 
 

@@ -24,6 +24,14 @@ function [phasePFs, CS] = selectPFs(ebsd, phase)
                 phasePFs = {PF1cpx_100,PF2cpx_010,PF3cpx_001};
             end
 
+            if (contains(string(phase), 'Clinopyroxene2'))
+                CS = ebsd.CS
+                PF1cpx_100 = Miller(1,0,0,CS,'hkl');
+                PF2cpx_010 = Miller(0,1,0,CS,'hkl');
+                PF3cpx_001 = Miller(0,0,1,CS,'uvw');
+                phasePFs = {PF1cpx_100,PF2cpx_010,PF3cpx_001};
+            end
+
             if (contains(string(phase), 'Spinelle'))
                 CS = ebsd.CS
                 PF1Chromite_100 = Miller(1,0,0,CS,'hkl');
@@ -40,7 +48,50 @@ function [phasePFs, CS] = selectPFs(ebsd, phase)
                 phasePFs = {PF1amph_100,PF2amph_010,PF3amph_001}
             end
 
-            if (contains(string(phase), 'Plagioclase'))
+            if (contains(string(phase), 'Hornblende'))
+                CS = ebsd.CS
+                PF1amph_100 = Miller(1,0,0,CS,'uvw');
+                PF2amph_010 = Miller(0,1,0,CS,'hkl');
+                PF3amph_001 = Miller(0,0,1,CS,'hkl');
+                phasePFs = {PF1amph_100,PF2amph_010,PF3amph_001}
+            end
+
+
+            if (contains(string(phase), 'Pargasite'))
+                CS = ebsd.CS
+                PF1amph_100 = Miller(1,0,0,CS,'uvw');
+                PF2amph_010 = Miller(0,1,0,CS,'hkl');
+                PF3amph_001 = Miller(0,0,1,CS,'hkl');
+                phasePFs = {PF1amph_100,PF2amph_010,PF3amph_001}
+            end
+
+
+            if (contains(string(phase), 'Antigorite'))
+                CS = ebsd.CS
+                PF1amph_100 = Miller(1,0,0,CS,'uvw');
+                PF2amph_010 = Miller(0,1,0,CS,'hkl');
+                PF3amph_001 = Miller(0,0,1,CS,'hkl');
+                phasePFs = {PF1amph_100,PF2amph_010,PF3amph_001}
+            end
+
+
+            if (contains(string(phase), 'Bytownite'))
+                CS = ebsd.CS
+                PF1plag_100 = Miller(1,0,0,CS,'uvw');
+                PF2plag_010 = Miller(0,1,0,CS,'hkl');
+                PF3plag_001 = Miller(0,0,1,CS,'hkl');
+                phasePFs = {PF1plag_100,PF2plag_010,PF3plag_001}
+            end
+
+            if (contains(string(phase), 'Anorthite'))
+                CS = ebsd.CS
+                PF1plag_100 = Miller(1,0,0,CS,'uvw');
+                PF2plag_010 = Miller(0,1,0,CS,'hkl');
+                PF3plag_001 = Miller(0,0,1,CS,'hkl');
+                phasePFs = {PF1plag_100,PF2plag_010,PF3plag_001}
+            end
+
+            if (contains(string(phase), 'Bytownite2'))
                 CS = ebsd.CS
                 PF1plag_100 = Miller(1,0,0,CS,'uvw');
                 PF2plag_010 = Miller(0,1,0,CS,'hkl');

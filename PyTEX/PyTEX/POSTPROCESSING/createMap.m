@@ -34,10 +34,10 @@ function createMap(OUTPUT, thinSection, mineral, ebsd, grains, linewidth, lineCo
         plot(ebsd, ebsd.bc)
         colormap gray
         hold on
-        for e=2:length(ebsd.mineralList)
-            plot(grains(ebsd.mineralList(e)).boundary, 'linewidth', linewidth, 'lineColor', ebsd(ebsd.mineralList(e)).color)
-            hold on
-        end
+        %for e=2:length(ebsd.mineralList)
+        %    plot(grains(ebsd.mineralList(e)).boundary, 'linewidth', linewidth, 'lineColor', ebsd(ebsd.mineralList(e)).color)
+        %    hold on
+        %end
         hold off
         task = 'BANDCONTRAST'
         saveMAP(OUTPUT, thinSection, '', task);

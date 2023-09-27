@@ -1,0 +1,27 @@
+element;EN;FR;ENsimp;FRsimp
+SF;Shape factor;Facteur de forme;Grain shape;Forme des grains
+EGD;Equivalent grain diameter;Diamètre de grain équivalent;Grain size;Taille de grains
+area;Grain area (µm2);Surface de grains (µm2);Grain area(µm2);Surface de grains (µm2)
+pondaspectRatio;aspect ration, area weighted;facteur d'allongement, pondéré par la surface
+pondEGD; Equivalent grain diameter, area weighted;Diamètre de grain équivalent (µm, pondéré par la surface)
+pondSF;Shape factor, area weighted;Facteur de forme, pondéré par la surface
+pondGOS;GOS, area weighted;GOS (degrés, pondéré par la surface)
+%catArea;Modal fraction upon sample surface;Fraction modale sur la surface de l'échantillon
+%sscat;Modal fraction upon mineral surface;Fraction modale sur la surface du minéral
+J;J index;Index J
+BA;BA index;Index BA
+BC;BC index;Index BC
+neoEGDmixte_pondGOS;GOS (degree, area ponderated, neoblasts);fr
+porphEGDmixte_pondGOS;GOS (microns, area ponderated, porphyroclasts);fr
+neoEGDmixte_pondaspectRatio; aspect ratio (area ponderated, neoblasts);fr
+porphEGDmixte_pondaspectRatio;aspect ratio (area ponderated, porphyroclasts);fr
+OlivineporphEGDmixte_pondSF;shape factor (area ponderated, Olivine porphyroclasts);fr
+OrthopyroxeneporphEGDmixte_pondSF;shape factor (area ponderated, Orthopyroxene porphyroclasts);fr
+OlivineporphEGDmixte_pondGOS;GOS (degree, area ponderated, Olivine porphyroclasts);fr
+OrthopyroxeneporphEGDmixte_pondGOS;GOS (degree, area ponderated, Orthopyroxene porphyroclasts);fr
+OlivineporphEGDmixte_pondaspectRatio;aspect ratio (area ponderated, Olivine porphyroclasts);fr
+OrthopyroxeneporphEGDmixte_pondaspectRatio;aspect ratio (area ponderated, Orthopyroxene porphyroclasts);fr
+OlivineporphEGDmixte_pondEGD;EGD (microns, area ponderated, Olivine porphyroclasts);fr
+OrthopyroxeneporphEGDmixte_pondEGD;EGD (microns, area ponderated, Orthopyroxene porphyroclasts);fr
+OlivineneoEGDmixte_pondEGD;EGD (microns, area ponderated, neoblasts of Olivine);fr
+Ol%sscatArea;Area fraction of neoblasts upon total Olivine;fr

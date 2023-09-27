@@ -1,12 +1,12 @@
 function [index, egdsf, area] = createOutputTable(OUTPUT, index, egdsf, area, segAngle, subGrainsAngle, non_indexed_option, small_grains_option)
 
-        [oindex] = fopen(strcat(OUTPUT, [index, '.txt']), 'a+');
+        [oindex] = fopen(strcat(OUTPUT, [index, '.csv']), 'a+');
         fprintf([oindex],'cat;sscat;subcat;J;BA;BC;AC;nb\n');
         
-        [oegdsf] = fopen(strcat(OUTPUT, [egdsf, '.txt']), 'a+');
+        [oegdsf] = fopen(strcat(OUTPUT, [egdsf, '.csv']), 'a+');
         fprintf([oegdsf], 'cat;sscat;subcat;SF;GROD;KAM;NB\n');
         
-        [oarea] = fopen(strcat(OUTPUT, [area, '.txt']), 'a+');
+        [oarea] = fopen(strcat(OUTPUT, [area, '.csv']), 'a+');
         fprintf([oarea], 'cat;sscat;Pixels;A.Frac(all);A.Frac(Ind);nbGrains;nbGrainsRemoved\n');
         
         [oparam] = fopen(strcat(OUTPUT, ['param', '.txt']), 'a+');
@@ -19,8 +19,8 @@ function [index, egdsf, area] = createOutputTable(OUTPUT, index, egdsf, area, se
         fprintf([oparam], strcat('\n Removed small grains option : ', string(small_grains_option)));
         fprintf([oparam],'\n\n');
 
-        index = [index, '.txt'];
-        egdsf = [egdsf, '.txt'];
-        area = [area, '.txt'];
+        index = [index, '.csv'];
+        egdsf = [egdsf, '.csv'];
+        area = [area, '.csv'];
 
 end

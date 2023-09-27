@@ -23,7 +23,7 @@
     clc
     
     % plotting preferences
-    %startup_mtex
+    startup_mtex
     set(groot,'defaultFigureVisible','off')
     setMTEXpref('xAxisDirection','east');
     setMTEXpref('zAxisDirection','outOfPlane');
@@ -40,10 +40,10 @@
 
 
     %% precise working directories
-    MAIN_FOLDER = '/Users/marialinechardelin/scripts/PyTEX/examples';
-    DATA = '/Users/marialinechardelin/scripts/PyTEX/data/';
+    MAIN_FOLDER = '/home/desktop/current/EBSD';
+    DATA = '/home/desktop/current/EBSD/data/';
     INPUT = '';
-    OUTPUT = '/Users/marialinechardelin/scripts/PyTEX/examples/dataClean/';
+    OUTPUT = '/home/desktop/current/EBSD/dataClean/';
 
     %% create output folders and output files 
     [INPUT, DATA, OUTPUT, thinSectionsList, thinSectionsFiles, thinSectionsData] = createOutputDir(MAIN_FOLDER, nbThinSections, DATA, INPUT, OUTPUT, formatClean, inputName);
@@ -58,15 +58,20 @@ for i = 1:length(thinSectionsList)
         %% loading ctf file
         [ebsd, TXTfile, DATAfile] = loadVarFiles(i, thinSectionsFiles, thinSectionsData, formatClean, transformationClean);
         
-        exportFormat(ebsd, OUTPUT, thinSection, 'ctf', 'r')
+        %ebsd = sliceEBSD(ebsd, 15)
+        exportFormat(ebsd, OUTPUT, thinSection, 'ctf', '-r')
 
         %%  putting the right colors for maps, checking phases names
         [ebsd, phaseList] = mineralColors(ebsd);
         phasesEBSD(OUTPUT, thinSection, ebsd, phaseList);
+
+        %plot(ebsd)
+        %task = 'EBSD'
+        %saveMAP(OUTPUT, thinSection, '', task);
     
         %% cleaning data, calculating grains and subgrains boundaries with no stair effect
         ebsd = dataCleaning(ebsd, madSeuil, segAngle, smallGrainsOption);
-        exportFormat(ebsd, OUTPUT, thinSection, 'ctf', 'c')
+        exportFormat(ebsd, OUTPUT, thinSection, 'ctf', '-c')
 
     catch
         filesError(OUTPUT, thinSection)

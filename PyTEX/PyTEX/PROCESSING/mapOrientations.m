@@ -1,4 +1,4 @@
-function mapOrientations(OUTPUT, thinSection, phase, ebsd, grains, grainsall, color, size)
+function mapOrientations(OUTPUT, thinSection, phase, ebsd, grains, grainsall, color, size, ebsdall, phases, minerals, colors)
 
             close all
 
@@ -10,13 +10,27 @@ function mapOrientations(OUTPUT, thinSection, phase, ebsd, grains, grainsall, co
             plotIPDF(grains.meanOrientation,  xvector, 'MarkerColor', color, 'MarkerSize', size)
             hold off 
             
-            task = strcat(phase, "_ipf");
+            task = "IPF";
             saveMAP(OUTPUT, thinSection, phase, task);
 
 
             close all
             legend('off')
             hold on
+
+            phases = string(phases);
+            for i=1:length(minerals)
+                ind = find(phases==minerals(i));
+                if ind>0
+                    indPhase = ebsdall.mineralList(ind);
+                    if length(ebsdall(indPhase))>0
+                        plot(grainsall(indPhase),'FaceColor',str2rgb(colors(i)))
+                        hold on
+                    else
+                        hold on
+                    end
+                end
+            end
             colors = ipfKey.orientation2color(ebsd.orientations);
             plot(ebsd,colors)
             hold on

@@ -16,21 +16,21 @@ function CPO(grains, odf, indMiller, mineral, OUTPUT, thinSection, comment, colo
             hold on
             colormap(mycolormap);
             hold on
-    %       c = colorbar;
+            %c = colorbar;
             %hold on;
-            annotation('textbox',[0.90 0.0212756264236902 0.0988967691095347 0.05], 'String', strcat(string(length(grains)), ' grains'), 'FontName','Serif', 'HorizontalAlignment','center', 'FontSize', 18, 'FitBoxToText', 'on', 'EdgeColor', 'white');
+            annotation('textbox',[0.89245474241126 0.0 0.113987284287012 0.101123744132535], 'String', strcat(string(length(grains)), ' grains'), 'FontName','Serif', 'HorizontalAlignment','center', 'FontSize', 10,  'LineStyle','none', 'FitBoxToText', 'off', 'EdgeColor', 'white');
             hold off
             %title(strcat('Nb grains :', string(length(grains))))
     
-            task = strcat('CPO_', comment);
+            task = strcat('CPO', comment);
             saveMAP(OUTPUT, thinSection, mineral, task)
 
         else
 
             col = color
             plotPDF(grains.meanOrientation, indMiller, 'lower', 'antipodal', 'MarkerSize', 4, 'MarkerColor', col)
-            annotation('textbox',[0.90 0.0212756264236902 0.0988967691095347 0.05], 'String', strcat(string(length(grains)), ' grains'), 'FontName','Serif', 'HorizontalAlignment','center', 'FontSize', 18, 'FitBoxToText', 'on', 'EdgeColor', 'white');
-            task = strcat('CPOoppg_', comment)
+            annotation('textbox',[0.89245474241126 0.0 0.113987284287012 0.101123744132535], 'String', strcat(string(length(grains)), ' grains'), 'FontName','Serif', 'HorizontalAlignment','center', 'FontSize', 10, 'LineStyle','none', 'FitBoxToText', 'off', 'EdgeColor', [1 1 1]);
+            task = strcat('CPOoppg', comment)
             saveMAP(OUTPUT, thinSection, mineral, task)
 
         end

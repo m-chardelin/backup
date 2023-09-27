@@ -1,6 +1,6 @@
 function exportParam(OUTPUT, thinSection, phase, comment, grains, meanGROD, meanKAM)
 
-                [oegdsf]=fopen(strcat(OUTPUT, 'egdsf.txt'), 'a+');
+                [oegdsf]=fopen(strcat(OUTPUT, 'egdsf.csv'), 'a+');
 
 
                 sf=mean(rmmissing(grains.shapeFactor));
